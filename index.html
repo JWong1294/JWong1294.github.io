@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Jason's Mini Projects</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<!-- Add icon library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<style>
+		.page, :target ~ .default {
+			display: none;
+		}
+		.default, :target {
+			display: block;
+		}
+		.footer {
+		  position: fixed;
+		  left: 0;
+		  bottom: 0;
+		  width: 100%;
+		  background-color: black;
+		  color: white;
+		  text-align: center;
+		}
+		.fa {
+		  padding: 5px;
+		  font-size: 30px;
+		  width: 30px;
+		  text-align: center;
+		  text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#incrementer">Jason's Projects</a>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<a class="nav-item nav-link" href="#incrementer"> Incrementer </a>
+			<a class="nav-item nav-link" href="#randomizer"> Randomizer </a>
+		</div>
+	</nav>
+	
+	<br/><br/>
+	
+	<div id="incrementer" class="page">
+	<br/><br/>
+		<form>
+			<div class="container">
+				<div class="page-header col-md-10 text-center">
+					<h1>Incrementer</h1>
+				</div>
+			</div>
+			
+			<br/><br/>
+			
+			<div class="container-fluid">
+				<div class="row justify-content-center">
+					<div>
+						<fieldset>
+							<input type="text" id="txtNumber" value="0" disabled="disabled" class="form-control text-center">
+							<br /><br />
+							<input type="button" class="btn btn-lg btn-primary" onclick="incrementValueOne()" value="Add 1" id='btnAddOne' />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn btn-lg btn-success" onclick="incrementValueFive()" value="Add 5" id='btnAddFive' />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn btn-lg btn-info" onclick="incrementValueTen()" value="Add 10" id='btnAddTen' />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn btn-lg btn-secondary" onclick="incrementValueTwentyFive()" value="Add 25" id='btnAddTwentyFive' />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn btn-md btn-danger" onclick="reset()" value="Reset" id='btnReset1' />
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<div id="randomizer" class="page">
+	<br/><br/>
+		<form>
+			<div class="container">
+				<div class="page-header col-md-10 text-center">
+					<h1>Randomizer</h1>
+				</div>
+			</div>
+
+			<br/>
+		
+			<div class="container-fluid">
+				<div class="row justify-content-center">
+					<div>
+						Enter items into the textbox, then click the <b>Add to List</b> button or hit the Enter key.
+						<br />
+						The <b>Singular</b> button will reveal the list one item at a time.
+						<br />
+						The <b>All</b> button will reveal the entire list.
+						<fieldset>
+							<br />
+							&nbsp;&nbsp;&nbsp;
+							Item: <input type="text" id="name" onkeypress="return searchKeyPress(event);">
+							<br /><br />
+							<input type='button' class='btn btn-lg btn-success' id='btnAdd' onclick="addToList()" value='Add to List' />
+							&nbsp;&nbsp;
+							<input type='button' class='btn btn-lg btn-primary' id='btnRandomize' onclick="randomize()" value='Singular' disabled="disabled" />
+							&nbsp;&nbsp;
+							<input type='button' class='btn btn-lg btn-info' id='btnRandomizeAll' onclick="randomizeAll()" value="All" disabled="disabled" />
+							&nbsp;&nbsp;
+							<input type='button' class='btn btn-md btn-danger' id='btnReset' value='Reset' />
+						</fieldset>
+						<br />
+					</div>
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-md-2">
+						Items entered:
+						<ol id="initialList"></ol>
+					</div>
+					
+					<div class="col-md-2">
+					</div>
+					
+					<div class="col-md-2">
+						Randomized list:
+						<ol id="randomizedList"></ol>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Footer -->
+	<div class="footer">
+		<p> 
+			<a href="https://twitter.com/traxxey" title='twitter' class="fa fa-twitter"></a>
+			&nbsp;&nbsp;&nbsp;
+			<a href="https://instagram.com/traxxey" class="fa fa-instagram"></a>
+		</p>
+	</div>	
+
+    <!-- Calls addToList function when the enter key is pressed -->
+    <script>
+        function searchKeyPress(e) {
+            // look for window.event in case event isn't passed in
+            e = e || window.event;
+            if (e.keyCode == 13) {
+                document.getElementById('btnAdd').click();
+                return false;
+            }
+            return true;
+        }
+    </script>
+	
+    <!-- Resets the randomizer -->
+    <script>
+        $('#btnReset').click(function () {
+            $('ol').empty();
+            var btn = document.getElementById("btnAdd");
+            btn.disabled = false;
+            btn = document.getElementById("btnRandomize");
+            btn.disabled = true;
+            btn = document.getElementById("btnRandomizeAll");
+            btn.disabled = true;
+            btn = document.getElementById("name");
+            btn.disabled = false;
+            document.getElementById('name').value = "";
+            document.getElementById('name').focus();
+        });
+    </script>
+	
+    <!-- Adds item to list -->
+    <script>
+        document.getElementById('name').value = "";
+        document.getElementById('name').focus();
+        var list = document.getElementById('initialList');
+        function addToList() {
+            var name = document.getElementById('name').value;
+            if (name.trim() == "") {
+            } else {
+                var entry = document.createElement('li');
+                entry.appendChild(document.createTextNode(name));
+                list.appendChild(entry);
+                var btn = document.getElementById("btnRandomize");
+                btn.disabled = false;
+                btn = document.getElementById("btnRandomizeAll");
+                btn.disabled = false;
+            }
+            document.getElementById('name').value = "";
+            document.getElementById('name').focus();
+        }
+    </script>
+	
+    <!-- Randomizer functions. randomize() for transferring one item at a time, randomizeAll for showing the entire list -->
+    <script>
+        function randomizeItems(items) {
+            var cached = items.slice(0), temp, i = cached.length, rand;
+            while (--i) {
+                rand = Math.floor(i * Math.random());
+                temp = cached[rand];
+                cached[rand] = cached[i];
+                cached[i] = temp;
+            }
+            return cached;
+        }
+        function randomize() {
+            var oldList = document.getElementById("initialList");
+            var newList = document.getElementById("randomizedList");
+            var nodes = oldList.children, i = 0;
+            nodes = Array.prototype.slice.call(nodes);
+            nodes = randomizeItems(nodes);
+            if (i != nodes.length) {
+                newList.appendChild(nodes[i]);
+            }
+            if (i == nodes.length - 1) {
+                var btn = document.getElementById("btnRandomize");
+                btn.disabled = true;
+            }
+            var btn = document.getElementById("btnAdd");
+            btn.disabled = true;
+            btn = document.getElementById("btnRandomizeAll");
+            btn.disabled = true;
+            btn = document.getElementById("name");
+            btn.disabled = true;
+        }
+        function randomizeAll() {
+            var oldList = document.getElementById("initialList");
+            var newList = document.getElementById("randomizedList");
+            var nodes = oldList.children, i = 0;
+            nodes = Array.prototype.slice.call(nodes);
+            nodes = randomizeItems(nodes);
+            while (i < nodes.length) {
+                newList.appendChild(nodes[i]);
+                ++i;
+            }
+            var btn = document.getElementById("btnAdd");
+            btn.disabled = true;
+            btn = document.getElementById("btnRandomize");
+            btn.disabled = true;
+            btn = document.getElementById("btnRandomizeAll");
+            btn.disabled = true;
+            btn = document.getElementById("name");
+            btn.disabled = true;
+        }
+    </script>
+	
+    <script>
+		function incrementValueOne() {
+            var value = parseFloat(document.getElementById('txtNumber').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value++;
+            document.getElementById('txtNumber').value = value;
+        }
+        function incrementValueFive() {
+            var value = parseFloat(document.getElementById('txtNumber').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value = value + 5;
+            document.getElementById('txtNumber').value = value;
+        }
+        function incrementValueTen() {
+            var value = parseFloat(document.getElementById('txtNumber').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value = value + 10;
+            document.getElementById('txtNumber').value = value;
+        }
+	function incrementValueTwentyFive() {
+            var value = parseFloat(document.getElementById('txtNumber').value, 25);
+            value = isNaN(value) ? 0 : value;
+            value = value + 25;
+            document.getElementById('txtNumber').value = value;
+        }
+        function reset() {
+            document.getElementById('txtNumber').value = '0';
+        }
+    </script>
+</body>
+</html>
